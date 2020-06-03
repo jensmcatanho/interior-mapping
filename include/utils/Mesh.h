@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ class Mesh : public IDrawable {
 
 		virtual void Init(const GLchar *, const GLchar *) override;
 
-		virtual void Draw(glm::mat4) const override;
+		virtual void Draw(std::shared_ptr<Camera> camera) const override;
 
 		void SetDiffuseMap(std::shared_ptr<Texture>);
 

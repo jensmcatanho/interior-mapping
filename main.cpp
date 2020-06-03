@@ -86,10 +86,7 @@ int main() {
 		window->ProcessInput(delta_time);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		glm::mat4 projection_matrix = window->m_Camera->ProjectionMatrix();
-		glm::mat4 view_matrix = window->m_Camera->ViewMatrix();
-		cube->Draw(projection_matrix * view_matrix);
+		cube->Draw(window->m_Camera);
 
 		window->SwapBuffers();
 		window->PollEvents();

@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,15 +26,19 @@ SOFTWARE.
 #ifndef IDRAWABLE_H
 #define IDRAWABLE_H
 
+#include "Camera.h"
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+
+#include <memory>
 
 namespace utils {
 
 class IDrawable {
 	public:
 		virtual void Init(const GLchar *, const GLchar *) = 0;
-		virtual void Draw(glm::mat4) const = 0;
+		virtual void Draw(std::shared_ptr<Camera>) const = 0;
 };
 
 }

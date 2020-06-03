@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -82,7 +82,7 @@ void Mesh::Init(const GLchar *vertex_path, const GLchar *fragment_path) {
 	m_Indices.shrink_to_fit();
 }
 
-void Mesh::Draw(glm::mat4 vp_matrix) const {
+void Mesh::Draw(std::shared_ptr<Camera> camera) const {
 	glBindVertexArray(m_VAOHandler);
 	glUseProgram(m_ShaderProgram);
 
@@ -98,7 +98,7 @@ void Mesh::Draw(glm::mat4 vp_matrix) const {
 
 	glm::mat4 model_matrix;
 	model_matrix = glm::translate(model_matrix, m_Position);
-	glm::mat4 mvp_matrix = vp_matrix * model_matrix;
+	glm::mat4 mvp_matrix = camera->ProjectionMatrix() * camera->ViewMatrix() * model_matrix;
 
 	glUniformMatrix4fv(4, 1, GL_FALSE, glm::value_ptr(mvp_matrix));
 	glDrawElements(GL_TRIANGLES, m_NumIndices, GL_UNSIGNED_SHORT, (void *)0);
