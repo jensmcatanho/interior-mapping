@@ -37,8 +37,8 @@ namespace utils {
 
 class IDrawable {
 	public:
-		virtual void Init(const GLchar *, const GLchar *) = 0;
-		virtual void Draw(std::shared_ptr<Camera>) const = 0;
+		virtual void Init(const GLchar *vertex_shader, const GLchar *fragment_shader) = 0;
+		virtual void Draw(std::shared_ptr<Camera> scene_camera) const = 0;
 };
 
 }

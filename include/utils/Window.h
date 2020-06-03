@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,75 +37,31 @@ namespace utils {
 
 class Window {
 	public:
-		/**
-		 * Default constructor.
-		 */
 		Window(std::string title, int width, int height);
 
-		/**
-		 * Create a GLFW window and an OpenGL context.
-		 */
 		bool Create(std::shared_ptr<Camera>);
 
-		/**
-		 * Process input from keyboard.
-		 */
 		void ProcessInput(GLfloat);
 	
-		/**
-		 * Display FPS at the window title.
-		 */
 		void DisplayFPS();
 
-		/**
-		 * Swap the back and the front buffers.
-		 */
 		void SwapBuffers();
 
-		/**
-		 * Process events in event queue.
-		 */
 		void PollEvents() const;
 
-		/**
-		 * Destroy GLFW window and terminate GLFW.
-		 */
 		void Close();
 
-		/**
-		 * Get pointer to GLFWwindow.
-		 */
 		GLFWwindow *GetPointer() const;
 
-		/**
-		 * Window's width.
-		 */
 		int m_Width;
 
-		/**
-		 * Window's height.
-		 */
 		int m_Height;
 
-		/**
-		 * Aspect Ratio.
-		 */
-		float m_AspectRatio;
-
-		/**
-		 * Scene camera.
-		 */
 		std::shared_ptr<Camera> m_Camera;
 
 	private:
-		/**
-		 * Pointer to the GLFWwindow type.
-		 */
 		GLFWwindow *m_Window;
 
-		/**
-		 * Title displayed at the window.
-		 */
 		std::string m_Title;
 };
 

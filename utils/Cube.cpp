@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,20 +27,6 @@ SOFTWARE.
 #include "utils/utils.h"
 
 namespace utils {
-
-Cube::Cube() :
-	Mesh(0.0f, 0.0f, 0.0f),
-	m_SideSize(1.0f) {
-	
-	GenerateData();
-}
-
-Cube::Cube(GLfloat x, GLfloat y, GLfloat z, GLfloat size) :
-	Mesh(x, y, z),
-	m_SideSize(1.0f) {
-	
-	GenerateData();
-}
 
 Cube::Cube(glm::vec3 position, GLfloat size) :
 	Mesh(position),

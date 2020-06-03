@@ -36,21 +36,17 @@ namespace utils {
 
 class Mesh : public IDrawable {
 	public:
-		Mesh();
-
-		Mesh(GLfloat, GLfloat, GLfloat);
-
-		Mesh(glm::vec3);
+		Mesh(glm::vec3 position);
 
 		virtual ~Mesh();
 
-		virtual void Init(const GLchar *, const GLchar *) override;
+		virtual void Init(const GLchar *vertex_shader, const GLchar *fragment_shader) override;
 
-		virtual void Draw(std::shared_ptr<Camera> camera) const override;
+		virtual void Draw(std::shared_ptr<Camera> scene_camera) const override;
 
-		void SetDiffuseMap(std::shared_ptr<Texture>);
+		void SetDiffuseMap(std::shared_ptr<Texture> diffuse_map);
 
-		void SetSpecularMap(std::shared_ptr<Texture>);
+		void SetSpecularMap(std::shared_ptr<Texture> specular_map);
 
 	protected:
 		glm::vec3 m_Position;
@@ -71,12 +67,12 @@ class Mesh : public IDrawable {
 		std::shared_ptr<Texture> m_SpecularMap;
 };
 
-inline void Mesh::SetDiffuseMap(std::shared_ptr<Texture> texture) {
-	m_DiffuseMap = texture;
+inline void Mesh::SetDiffuseMap(std::shared_ptr<Texture> diffuse_map) {
+	m_DiffuseMap = diffuse_map;
 }
 
-inline void Mesh::SetSpecularMap(std::shared_ptr<Texture> texture) {
-	m_SpecularMap = texture;
+inline void Mesh::SetSpecularMap(std::shared_ptr<Texture> specular_map) {
+	m_SpecularMap = specular_map;
 }
 
 }

@@ -68,7 +68,7 @@ int main() {
 	glCullFace(GL_BACK);
 	std::cout << "Back-face culling enabled." << std::endl;
 
-	auto cube = std::make_shared<utils::Cube>();
+	auto cube = std::make_shared<utils::Cube>(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f);
 	cube->Init("resources/cube.vert", "resources/cube.frag");
 
 	// Prepare rendering.

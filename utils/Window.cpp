@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,8 +43,8 @@ GLfloat lastY = 768 / 2.0f;
 Window::Window(std::string title, int width, int height) :
 	m_Title(title),
 	m_Width(width),
-	m_Height(height),
-	m_AspectRatio(static_cast<float>(width / height)) {
+	m_Height(height) {
+
 }
 
 bool Window::Create(std::shared_ptr<Camera> camera) {

@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,9 +38,9 @@ class Texture {
 
 		~Texture();
 
-		void Load(const std::string &);
+		void Load(const std::string &path);
 
-		void Bind(unsigned int) const;
+		void Bind(unsigned int slot) const;
 
 	private:
 		GLuint m_ID;

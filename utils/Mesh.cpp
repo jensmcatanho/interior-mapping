@@ -30,16 +30,6 @@ SOFTWARE.
 
 namespace utils {
 
-Mesh::Mesh() :
-	m_Position(0.0f, 0.0f, 0.0f) {
-	
-}
-
-Mesh::Mesh(GLfloat x, GLfloat y, GLfloat z) :
-	m_Position(x, y, z) {
-
-}
-
 Mesh::Mesh(glm::vec3 position) :
 	m_Position(position) {
 
