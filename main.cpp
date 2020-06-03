@@ -36,7 +36,7 @@ int main() {
 	 * http://www.glfw.org/docs/latest/index.html
 	 */
 	auto window = std::make_shared<utils::Window>("Interior Mapping", 1024, 768);
-	auto camera = std::make_shared<utils::Camera>(0.0f, 0.0f, 5.0f);
+	auto camera = std::make_shared<utils::Camera>(glm::vec3(0.0f, 0.0f, 5.0f), 1024/768);
 	window->Create(camera);
 
 	/* Enable MSAA.
@@ -87,7 +87,7 @@ int main() {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 projection_matrix = window->m_Camera->ProjectionMatrix(window->m_AspectRatio);
+		glm::mat4 projection_matrix = window->m_Camera->ProjectionMatrix();
 		glm::mat4 view_matrix = window->m_Camera->ViewMatrix();
 		cube->Draw(projection_matrix * view_matrix);
 

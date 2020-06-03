@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,9 +32,6 @@ SOFTWARE.
 
 namespace utils {
 
-/**
- * Camera's default values.
- */
 enum Movement {
 	FORWARD,
 	BACKWARD,
@@ -50,131 +47,54 @@ const GLfloat ZOOM = 45.0f;
 
 class Camera {
 	public:
-		/**
-		 * Standard constructor.
-		 * @param position Camera's location in world coordinates.
-		 */
-		Camera(glm::vec3 position);
+		Camera(glm::vec3 position, GLfloat aspect_ratio);
 
-		/**
-		* Standard constructor.
-		* @param position Camera's location in world coordinates.
-		*/
-		Camera(GLfloat x, GLfloat y, GLfloat z);
-
-		/**
-		 * Processes the camera's movement.
-		 * @param direction Moving direction.
-		 * @param delta_time Time in seconds it took to complete the last frame.
-		 */
 		void ProcessMovement(Movement direction, GLfloat delta_time);
 
-		/**
-		 * Processes the camera's rotation.
-		 * @param x_offset Horizontal offset.
-		 * @param y_offset Vertical offset.
-		 */
 		void ProcessRotation(GLfloat x_offset, GLfloat y_offset);
 
-		/**
-		 * Processes the camera's zoom.
-		 * @param y_offset 
-		 */
 		void ProcessZoom(GLfloat y_offset);
 
-		/**
-		 * Set the camera's position in world coordinates.
-		 * @param position Target position.
-		 */
 		void SetPosition(glm::vec3 position);
 
-		/**
-		 * Set the direction the camera is looking at.
-		 * @param target Target direction.
-		 */
-		void LookAt(glm::vec3 target);
-
-		/**
-		 * Computes the corresponding view matrix.
-		 * @return The view matrix.
-		 */
 		glm::mat4 ViewMatrix() const;
 
-		/**
-		 * Computes the corresponding projection matrix.
-		 * @return The projection matrix.
-		 */
-		glm::mat4 ProjectionMatrix(GLfloat) const;
+		glm::mat4 ProjectionMatrix() const;
 
-		/**
-		 * 
-		 * @return 
-		 */
 		glm::vec3 GetPosition() const;
 
-		/**
-		 *
-		 */
 		GLfloat m_Zoom;
 
 	private:
-		/**
-		 *
-		 */
 		void UpdateVectors();
 
-		/**
-		 * Location in world coordinates.
-		 */
 		glm::vec3 m_Position;
 
-		/**
-		 *
-		 */
 		glm::vec3 m_U;
 
-		/**
-		 *
-		 */
 		glm::vec3 m_V;
 
-		/**
-		 *
-		 */
 		glm::vec3 m_W;
 
-		/**
-		 *
-		 */
 		glm::vec3 m_WorldUp;
 
-		/**
-		 * Yaw angle.
-		 */
 		GLfloat m_Yaw;
 
-		/**
-		 * Pitch angle.
-		 */
 		GLfloat m_Pitch;
 
-		/**
-		 * Camera's movement speed.
-		 */
 		GLfloat m_MovementSpeed;
 
-		/**
-		 * Mouse sensitivity.
-		 */
 		GLfloat m_Sensitivity;
+
+		GLfloat m_AspectRatio;
 };
 
 inline glm::mat4 Camera::ViewMatrix() const {
 	return glm::lookAt(m_Position, m_Position - m_W, m_V);
 }
 
-inline glm::mat4 Camera::ProjectionMatrix(GLfloat aspect_ratio) const {
-	return glm::perspective(static_cast<double>(glm::radians(m_Zoom)), static_cast<double>(aspect_ratio), 0.0001, 10000.0);
+inline glm::mat4 Camera::ProjectionMatrix() const {
+	return glm::perspective(static_cast<double>(glm::radians(m_Zoom)), static_cast<double>(m_AspectRatio), 0.0001, 10000.0);
 }
 
 inline glm::vec3 Camera::GetPosition() const {

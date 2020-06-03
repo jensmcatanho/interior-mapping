@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2018 Jean Michel Catanho
+Copyright (c) 2020 Jean Michel Catanho
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,26 +28,15 @@ SOFTWARE.
 
 namespace utils {
 
-Camera::Camera(glm::vec3 position) :
+Camera::Camera(glm::vec3 position, GLfloat aspect_ratio) :
 	m_Position(position),
 	m_WorldUp(0.0f, 1.0f, 0.0f),
 	m_Yaw(YAW),
 	m_Pitch(PITCH), 
 	m_MovementSpeed(SPEED),
 	m_Sensitivity(SENSITIVITY),
-	m_Zoom(ZOOM) {
-
-	UpdateVectors();
-}
-
-Camera::Camera(GLfloat x, GLfloat y, GLfloat z) :
-	m_Position(x, y, z),
-	m_WorldUp(0.0f, 1.0f, 0.0f),
-	m_Yaw(YAW),
-	m_Pitch(PITCH), 
-	m_MovementSpeed(SPEED),
-	m_Sensitivity(SENSITIVITY),
-	m_Zoom(ZOOM) {
+	m_Zoom(ZOOM),
+	m_AspectRatio(aspect_ratio) {
 
 	UpdateVectors();
 }
