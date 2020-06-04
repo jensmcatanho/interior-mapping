@@ -80,9 +80,9 @@ void main() {
 
 	} else {
 		Plane wall;
-		wall.position = ((ceil(surfaceToCamera.origin.x / roomWidth) - roomWidth) * roomWidth) * rightVector;
+		wall.position = ((ceil(surfaceToCamera.origin.x / roomWidth) - 1.0) * roomWidth) * rightVector;
 		wall.normal = -rightVector;
-		wall.color = vec3(1.0, 1.0, 1.0);
+		wall.color = vec3(1.0, 0.1, 1.0);
 		
 		zBuffer = checkVisibility(surfaceToCamera, wall, zBuffer);
 	}
