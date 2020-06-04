@@ -168,8 +168,8 @@
     <ClCompile Include="utils\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\cube.frag" />
-    <None Include="resources\cube.vert" />
+    <None Include="resources\fragment.glsl" />
+    <None Include="resources\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\utils\Camera.h" />

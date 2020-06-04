@@ -52,8 +52,8 @@ void Mesh::Init(const GLchar *vertex_path, const GLchar *fragment_path) {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)0);
 
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
 
 	GLuint ebo;
 	glGenBuffers(1, &ebo);
@@ -76,6 +76,16 @@ void Mesh::Draw(std::shared_ptr<Camera> camera) const {
 	glBindVertexArray(m_VAOHandler);
 	glUseProgram(m_ShaderProgram);
 
+	glm::vec3 camera_position = camera->GetPosition();
+	glUniform3fv(2, 1, glm::value_ptr(camera_position));
+
+	glm::mat4 model_matrix;
+	model_matrix = glm::translate(model_matrix, m_Position);
+
+	glm::mat4 mvp_matrix = camera->ProjectionMatrix() * camera->ViewMatrix() * model_matrix;
+	glUniformMatrix4fv(4, 1, GL_FALSE, glm::value_ptr(mvp_matrix));
+
+
 	if (m_DiffuseMap) {
 		m_DiffuseMap->Bind(0);
 		glUniform1i(6, 0);
@@ -86,11 +96,6 @@ void Mesh::Draw(std::shared_ptr<Camera> camera) const {
 		glUniform1i(7, 0);
 	}
 
-	glm::mat4 model_matrix;
-	model_matrix = glm::translate(model_matrix, m_Position);
-	glm::mat4 mvp_matrix = camera->ProjectionMatrix() * camera->ViewMatrix() * model_matrix;
-
-	glUniformMatrix4fv(4, 1, GL_FALSE, glm::value_ptr(mvp_matrix));
 	glDrawElements(GL_TRIANGLES, m_NumIndices, GL_UNSIGNED_SHORT, (void *)0);
 }
 

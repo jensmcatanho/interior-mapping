@@ -38,10 +38,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\cube.frag">
+    <None Include="resources\fragment.glsl">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\cube.vert">
+    <None Include="resources\vertex.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
