@@ -49,6 +49,8 @@ class Window {
 
 		void PollEvents() const;
 
+		bool ShouldClose() const;
+
 		void Close();
 
 		GLFWwindow *GetPointer() const;
@@ -64,6 +66,10 @@ class Window {
 
 		std::string m_Title;
 };
+
+inline bool Window::ShouldClose() const {
+	return glfwWindowShouldClose(m_Window);
+}
 
 inline void Window::Close() {
 	glfwDestroyWindow(m_Window);

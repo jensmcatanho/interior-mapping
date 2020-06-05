@@ -80,7 +80,7 @@ int main() {
 	GLfloat last_frame = 0.0f;
 
 	glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
-	while (!glfwWindowShouldClose(window->GetPointer())) {
+	while (!window->ShouldClose()) {
 		current_frame = glfwGetTime();
 		delta_time = current_frame - last_frame;
 		last_frame = current_frame;
