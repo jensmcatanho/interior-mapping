@@ -57,7 +57,6 @@ class Mesh : public IDrawable {
 
 		GLuint m_NumIndices;
 
-	private:
 		GLuint m_ShaderProgram;
 
 		GLuint m_VAOHandler;

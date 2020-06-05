@@ -23,22 +23,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -----------------------------------------------------------------------------
 */
-#ifndef CUBE_H
-#define CUBE_H
+#ifndef BUILDING_H
+#define BUILDING_H
 
 #include "Mesh.h"
 
 namespace utils {
 
-class Cube : public Mesh {
+class Building : public Mesh {
 	public:
-		Cube(glm::vec3 position, GLfloat size);
+		Building(glm::vec3 position, GLfloat height, GLfloat width, GLfloat depth);
+
+		virtual void Draw(std::shared_ptr<Camera> scene_camera) const override;
+
+		void SetFloors(GLuint floors);
+
+		void SetRoomSize(GLfloat room_size);
 
 	private:
 		void GenerateData();
 
-		GLint m_SideSize;
+		GLfloat height;
+
+		GLfloat width;
+		
+		GLfloat depth;
+
+		GLuint floors;
+
+		GLfloat roomSize;
 };
+
+inline void Building::SetFloors(GLuint floors) {
+	this->floors = floors;
+}
+
+inline void Building::SetRoomSize(GLfloat room_size) {
+	roomSize = room_size;
+}
 
 }
 

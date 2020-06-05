@@ -33,15 +33,15 @@
     <ClCompile Include="utils\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Cube.cpp">
+    <ClCompile Include="utils\Building.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\fragment.glsl">
+    <None Include="resources\vertex.glsl">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\vertex.glsl">
+    <None Include="resources\fragment.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -64,7 +64,7 @@
     <ClInclude Include="include\utils\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\Cube.h">
+    <ClInclude Include="include\utils\Building.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

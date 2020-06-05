@@ -68,8 +68,11 @@ int main() {
 	glCullFace(GL_BACK);
 	std::cout << "Back-face culling enabled." << std::endl;
 
-	auto cube = std::make_shared<utils::Cube>(glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-	cube->Init("resources/vertex.glsl", "resources/fragment.glsl");
+	auto building = std::make_shared<utils::Building>(glm::vec3(0.0f, 0.0f, 0.0f), 1.0f, 1.0f, 1.0f);
+	building->Init("resources/vertex.glsl", "resources/fragment.glsl");
+
+	building->SetFloors(4);
+	building->SetRoomSize(0.25);
 
 	// Prepare rendering.
 	GLfloat delta_time;
@@ -86,7 +89,7 @@ int main() {
 		window->ProcessInput(delta_time);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		cube->Draw(window->m_Camera);
+		building->Draw(window->m_Camera);
 
 		window->SwapBuffers();
 		window->PollEvents();

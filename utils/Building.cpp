@@ -23,19 +23,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -----------------------------------------------------------------------------
 */
-#include "utils/Cube.h"
+#include "utils/Building.h"
 #include "utils/utils.h"
+
+#include <glm/gtc/type_ptr.hpp>
 
 namespace utils {
 
-Cube::Cube(glm::vec3 position, GLfloat size) :
+Building::Building(glm::vec3 position, GLfloat width, GLfloat height, GLfloat depth) :
 	Mesh(position),
-	m_SideSize(1.0f) {
+	width(width),
+	height(height),
+	depth(depth) {
 	
 	GenerateData();
 }
 
-void Cube::GenerateData() {
+void Building::GenerateData() {
 	GLuint vertices_count = 8;
 	GLuint texcoords_count = 8;
 	m_NumIndices = 36;
@@ -46,19 +50,19 @@ void Cube::GenerateData() {
 	
 	*d_iterator++ = 0.0f; *d_iterator++ = 0.0f; *d_iterator++ =  0.0f;
 	*d_iterator++ = 0.0f; *d_iterator++ = 0.0f;
-	*d_iterator++ = m_SideSize; *d_iterator++ = 0.0f; *d_iterator++ = 0.0f;
+	*d_iterator++ = width; *d_iterator++ = 0.0f; *d_iterator++ = 0.0f;
 	*d_iterator++ = 1.0f; *d_iterator++ = 0.0f;
-	*d_iterator++ = m_SideSize; *d_iterator++ = m_SideSize; *d_iterator++ = 0.0f;
+	*d_iterator++ = width; *d_iterator++ = height; *d_iterator++ = 0.0f;
 	*d_iterator++ = 1.0f; *d_iterator++ = 1.0f;
-	*d_iterator++ = 0.0f; *d_iterator++ = m_SideSize; *d_iterator++ = 0.0f;
+	*d_iterator++ = 0.0f; *d_iterator++ = height; *d_iterator++ = 0.0f;
 	*d_iterator++ = 0.0f; *d_iterator++ = 1.0f;
-	*d_iterator++ = 0.0f; *d_iterator++ = 0.0f; *d_iterator++ = -m_SideSize;
+	*d_iterator++ = 0.0f; *d_iterator++ = 0.0f; *d_iterator++ = -depth;
 	*d_iterator++ = 0.0f; *d_iterator++ = 0.0f;
-	*d_iterator++ = m_SideSize; *d_iterator++ = 0.0f; *d_iterator++ = -m_SideSize;
+	*d_iterator++ = width; *d_iterator++ = 0.0f; *d_iterator++ = -depth;
 	*d_iterator++ = 1.0f; *d_iterator++ = 0.0f;
-	*d_iterator++ = m_SideSize; *d_iterator++ = m_SideSize; *d_iterator++ = -m_SideSize;
+	*d_iterator++ = width; *d_iterator++ = height; *d_iterator++ = -depth;
 	*d_iterator++ = 1.0f; *d_iterator++ = 1.0f;
-	*d_iterator++ = 0.0f; *d_iterator++ = m_SideSize; *d_iterator++ = -m_SideSize;
+	*d_iterator++ = 0.0f; *d_iterator++ = height; *d_iterator++ = -depth;
 	*d_iterator++ = 0.0f; *d_iterator++ = 1.0f;
 
 	std::vector<GLushort>::iterator i_iterator = m_Indices.begin();
@@ -81,6 +85,26 @@ void Cube::GenerateData() {
 	// Top face
 	*i_iterator++ = 3; *i_iterator++ = 2; *i_iterator++ = 6;
 	*i_iterator++ = 6; *i_iterator++ = 7; *i_iterator++ = 3;
+}
+
+
+void Building::Draw(std::shared_ptr<Camera> camera) const {
+	glBindVertexArray(m_VAOHandler);
+	glUseProgram(m_ShaderProgram);
+
+	glm::vec3 camera_position = camera->GetPosition();
+	glUniform3fv(2, 1, glm::value_ptr(camera_position));
+
+	glm::mat4 model_matrix;
+	model_matrix = glm::translate(model_matrix, m_Position);
+
+	glm::mat4 mvp_matrix = camera->ProjectionMatrix() * camera->ViewMatrix() * model_matrix;
+	glUniformMatrix4fv(3, 1, GL_FALSE, glm::value_ptr(mvp_matrix));
+
+	glUniform1f(4, roomSize);
+	glUniform1f(5, height/floors);
+
+	glDrawElements(GL_TRIANGLES, m_NumIndices, GL_UNSIGNED_SHORT, (void*)0);
 }
 
 }

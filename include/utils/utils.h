@@ -30,7 +30,7 @@ SOFTWARE.
 #include <GL/glew.h>
 
 #include "Camera.h"
-#include "Cube.h"
+#include "Building.h"
 #include "Mesh.h"
 #include "Window.h"
 

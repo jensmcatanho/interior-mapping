@@ -161,7 +161,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils\Camera.cpp" />
-    <ClCompile Include="utils\Cube.cpp" />
+    <ClCompile Include="utils\Building.cpp" />
     <ClCompile Include="utils\Mesh.cpp" />
     <ClCompile Include="utils\Texture.cpp" />
     <ClCompile Include="utils\utils.cpp" />
@@ -173,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\utils\Camera.h" />
-    <ClInclude Include="include\utils\Cube.h" />
+    <ClInclude Include="include\utils\Building.h" />
     <ClInclude Include="include\utils\IDrawable.h" />
     <ClInclude Include="include\utils\Mesh.h" />
     <ClInclude Include="include\utils\Texture.h" />

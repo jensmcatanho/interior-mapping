@@ -6,23 +6,6 @@ struct Material {
     float shininess;
 };
 
-in vec2 vs_TexCoord;
-
-in vec3 vs_CameraDirection;
-in vec3 vs_ObjectPosition;
-
-layout(location = 6) uniform Material u_Material;
-
-out vec4 FragColor;
-
-vec3 upVector = vec3(0.0, 1.0, 0.0);
-vec3 rightVector = vec3(1.0, 0.0, 0.0);
-vec3 forwardVector = vec3(0.0, 0.0, 1.0);
-
-float roomHeight = 0.25;
-float roomWidth = 0.25;
-
-
 struct Plane {
 	vec3 position;
 	vec3 normal;
@@ -33,6 +16,20 @@ struct Ray {
 	vec3 direction;
 	vec3 origin;
 };
+
+vec3 upVector = vec3(0.0, 1.0, 0.0);
+vec3 rightVector = vec3(1.0, 0.0, 0.0);
+vec3 forwardVector = vec3(0.0, 0.0, 1.0);
+
+in vec2 vs_TexCoord;
+in vec3 vs_CameraDirection;
+in vec3 vs_ObjectPosition;
+
+//layout(location = 6) uniform Material u_Material;
+layout(location = 4) uniform float room_size;
+layout(location = 5) uniform float room_height;
+
+out vec4 FragColor;
 
 vec4 checkVisibility(Ray ray, Plane plane, vec4 zBuffer) {
 	float distance = dot(plane.position - ray.origin, plane.normal) / dot(plane.normal, ray.direction);
@@ -55,7 +52,7 @@ void main() {
 
 	if (dot(upVector, surfaceToCamera.direction) > 0) {
 		Plane ceiling;
-		ceiling.position = (ceil(surfaceToCamera.origin.y / roomHeight) * roomHeight) * upVector;
+		ceiling.position = (ceil(surfaceToCamera.origin.y / room_height) * room_height) * upVector;
 		ceiling.normal = upVector;
 		ceiling.color = vec3(1.0, 0.0, 0.0);
 		
@@ -63,7 +60,7 @@ void main() {
 
 	} else {
 		Plane floor;
-		floor.position = ((ceil(surfaceToCamera.origin.y / roomHeight) - 1.0) * roomHeight) * upVector;
+		floor.position = ((ceil(surfaceToCamera.origin.y / room_height) - 1.0) * room_height) * upVector;
 		floor.normal = -upVector;
 		floor.color = vec3(0.0, 1.0, 0.0);
 		
@@ -72,7 +69,7 @@ void main() {
 	
 	if (dot(rightVector, surfaceToCamera.direction) > 0) {
 		Plane wall;
-		wall.position = (ceil(surfaceToCamera.origin.x / roomWidth) * roomWidth) * rightVector;
+		wall.position = (ceil(surfaceToCamera.origin.x / room_size) * room_size) * rightVector;
 		wall.normal = rightVector;
 		wall.color = vec3(0.0, 0.0, 1.0);
 		
@@ -80,7 +77,7 @@ void main() {
 
 	} else {
 		Plane wall;
-		wall.position = ((ceil(surfaceToCamera.origin.x / roomWidth) - 1.0) * roomWidth) * rightVector;
+		wall.position = ((ceil(surfaceToCamera.origin.x / room_size) - 1.0) * room_size) * rightVector;
 		wall.normal = -rightVector;
 		wall.color = vec3(1.0, 0.1, 1.0);
 		
@@ -89,7 +86,7 @@ void main() {
 	
 	if (dot(forwardVector, surfaceToCamera.direction) > 0) {
 		Plane wall;
-		wall.position = (ceil(surfaceToCamera.origin.z / roomWidth) * roomWidth) * forwardVector;
+		wall.position = (ceil(surfaceToCamera.origin.z / room_size) * room_size) * forwardVector;
 		wall.normal = forwardVector;
 		wall.color = vec3(0.0, 1.0, 1.0);
 		
@@ -97,7 +94,7 @@ void main() {
 
 	} else {
 		Plane wall;
-		wall.position = ((ceil(surfaceToCamera.origin.z / roomWidth) - 1.0) * roomWidth) * forwardVector;
+		wall.position = ((ceil(surfaceToCamera.origin.z / room_size) - 1.0) * room_size) * forwardVector;
 		wall.normal = -forwardVector;
 		wall.color = vec3(0.0, 0.0, 0.0);
 		
